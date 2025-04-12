@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Tuition Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      input, button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        font-size: 16px;
+      }
+    </style>
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const location = document.getElementById("location").value;
+        const whatsapp = document.getElementById("whatsapp").value;
+
+        fetch("https://script.google.com/macros/s/AKfycbwF3Jih98jvcz6M_fAhm5JGpQPU8BiIGJigyfzMDCIwquGtKVIkVLS_3PKWGGzfSbe-/exec", {
+          method: "POST",
+          body: JSON.stringify({ name, location, whatsapp }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(response => response.text())
+        .then(url => {
+          window.location.href = url;
+        })
+        .catch(error => {
+          alert("Error: " + error.message);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Teacher Registration Form</h2>
+    <form onsubmit="handleSubmit(event)">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="text" id="location" placeholder="Location" required>
+      <input type="text" id="whatsapp" placeholder="WhatsApp Number" required>
+      <button type="submit">Submit</button>
+    </form>
+  
+</body></html>
